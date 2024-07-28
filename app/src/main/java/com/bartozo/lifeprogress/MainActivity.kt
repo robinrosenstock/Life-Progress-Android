@@ -3,6 +3,7 @@ package com.bartozo.lifeprogress
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -20,13 +21,15 @@ import com.bartozo.lifeprogress.ui.navigation.Screen
 import com.bartozo.lifeprogress.ui.theme.LifeProgressTheme
 import com.bartozo.lifeprogress.ui.viewmodels.MainEventState
 import com.bartozo.lifeprogress.ui.viewmodels.MainViewModel
+import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
+import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,16 +91,10 @@ class MainActivity : ComponentActivity() {
             appUpdateManager = AppUpdateManagerFactory.create(baseContext)
         }
 
-        val appUpdateInfo = appUpdateManager.appUpdateInfo
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
-        appUpdateInfo.addOnSuccessListener {
-            handleUpdate(appUpdateManager, appUpdateInfo)
-        }
-    }
-
-    private fun handleUpdate(manager: AppUpdateManager, info: Task<AppUpdateInfo>) {
-        if (APP_UPDATE_TYPE_SUPPORTED == AppUpdateType.IMMEDIATE) {
-            handleImmediateUpdate(manager, info)
+        appUpdateInfoTask.addOnSuccessListener {
+            handleImmediateUpdate(appUpdateManager, appUpdateInfoTask)
         }
     }
 
@@ -106,8 +103,7 @@ class MainActivity : ComponentActivity() {
             info.result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
             && info.result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
 
-            manager.startUpdateFlowForResult(info.result,
-                AppUpdateType.IMMEDIATE, this, REQUEST_UPDATE)
+            manager.startUpdateFlowForResult(info.result, AppUpdateType.IMMEDIATE, this, REQUEST_UPDATE)
         }
 
         // Simulates an immediate update
