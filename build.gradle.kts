@@ -7,11 +7,6 @@ buildscript {
         set("nav_version", "2.5.1")
     }
 
-    repositories {
-        google()
-        mavenCentral()
-    }
-
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.43.2")
     }
