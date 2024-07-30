@@ -1,9 +1,10 @@
 import org.gradle.api.tasks.Delete
 
+val composeVersion by extra { "1.4.0-alpha02" }
+
 buildscript {
     extra.apply {
         set("kotlin_version", "1.8.0")
-        set("compose_version", "1.3.0-beta01")
         set("nav_version", "2.5.1")
     }
 
@@ -15,7 +16,7 @@ buildscript {
 plugins {
     id("com.android.application") version "8.5.1" apply false
     id("com.android.library") version "8.5.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.7.10" apply false
+    id("org.jetbrains.kotlin.android") version "1.7.21" apply false
 }
 
 tasks.register<Delete>("clean") {
