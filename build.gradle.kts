@@ -1,6 +1,6 @@
 import org.gradle.api.tasks.Delete
 
-val composeVersion by extra { "1.4.0-alpha02" }
+val composeVersion by extra { "1.4.8" }
 
 buildscript {
     extra.apply {
@@ -16,9 +16,6 @@ buildscript {
 plugins {
     id("com.android.application") version "8.5.1" apply false
     id("com.android.library") version "8.5.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.7.21" apply false
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
+    kotlin("jvm") version "1.8.22"
+    //id("org.jetbrains.kotlin.android") version "1.7.21" apply false
 }
