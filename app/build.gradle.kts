@@ -2,11 +2,11 @@
 val composeVersion: String by rootProject.extra
 
 plugins {
-    id("kotlin-kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("plugin.serialization") version "1.9.0"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -74,9 +74,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     // Material design
-    implementation("androidx.compose.material3:material3:1.0.0-beta01")
-    implementation("com.google.android.material:material:1.8.0-alpha01")
-    implementation("androidx.compose.material:material-icons-extended:1.2.1")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha07")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.compose.material:material-icons-extended:1.6.8")
 
     // Compose Material Dialogs
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
@@ -86,10 +86,10 @@ dependencies {
 
     // Dependency Injection - Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    ksp("com.google.dagger:dagger-compiler:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
 
     // Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.34.0")
