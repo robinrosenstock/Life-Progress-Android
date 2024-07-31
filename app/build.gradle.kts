@@ -1,12 +1,11 @@
 
-val composeVersion: String by rootProject.extra
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     kotlin("plugin.serialization") version "1.9.0"
     id("com.google.devtools.ksp")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -39,9 +38,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
-    }
+
     packagingOptions {
         resources {
             excludes += listOf("META-INF/AL2.0","META-INF/LGPL2.1","META-INF/DEPENDENCIES")
@@ -53,59 +50,59 @@ android {
 dependencies {
 
     // Kotlin
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.coroutines.play.services)
 
     // Tests
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     // Compose
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.9.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.activity.compose)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.constraintlayout.compose)
 
     // Material design
-    implementation("androidx.compose.material3:material3:1.1.0-alpha07")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation(libs.androidx.material3)
+    implementation(libs.material)
+    implementation(libs.androidx.material.icons.extended)
 
     // Compose Material Dialogs
-    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
+    implementation(libs.datetime)
 
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation(libs.androidx.datastore.preferences)
 
     // Dependency Injection - Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    implementation("androidx.hilt:hilt-work:1.2.0")
-    ksp("com.google.dagger:dagger-compiler:2.51.1")
-    ksp("com.google.dagger:hilt-compiler:2.51.1")
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.dagger.compiler)
+    ksp(libs.hilt.compiler)
 
     // Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.34.0")
+    implementation(libs.accompanist.systemuicontroller)
 
     // Glance
-    implementation("androidx.glance:glance-appwidget:1.0.0-alpha05")
+    implementation(libs.androidx.glance.appwidget)
 
     // WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation(libs.androidx.work.runtime.ktx)
 
     // Splash screen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
     // In-app updates
-    implementation("com.google.android.play:app-update:2.1.0")
-    implementation("com.google.android.play:app-update-ktx:2.1.0")
+    implementation(libs.app.update)
+    implementation(libs.app.update.ktx)
     // TODO - Check why this dependency didn"t work
     // implementation "com.google.android.play:app-update-ktx:2.0.0"
 }
