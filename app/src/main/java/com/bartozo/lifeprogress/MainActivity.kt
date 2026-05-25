@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        checkForUpdates()
+        // checkForUpdates()
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.mainUiState.value == MainEventState.Loading

@@ -39,13 +39,13 @@ enum class AgeGroup(val age: Int = 0) {
 
     fun getColor(): Color {
         return when (this) {
-            BABY -> Color(0xFF069DDE)
-            CHILD -> Color(0xFF5FB945)
-            ADOLESCENT -> Color(0xFFF9B828)
-            YOUNGADULT -> Color(0xFFF7801A)
-            ADULT -> Color(0xFFDF3B3C)
-            MIDDLEAGE -> Color(0xFF943B95)
-            OLDAGE -> Color(0xFF955F3B)
+            BABY -> Color(0xFF000000)
+            CHILD -> Color(0xFF000000)
+            ADOLESCENT -> Color(0xFF000000)
+            YOUNGADULT -> Color(0xFF000000)
+            ADULT -> Color(0xFF000000)
+            MIDDLEAGE -> Color(0xFF000000)
+            OLDAGE -> Color(0xFF000000)
         }
     }
 }
